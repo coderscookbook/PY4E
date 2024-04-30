@@ -1,16 +1,16 @@
 # Import Modules
-import timeit
-import time
-from   collections import defaultdict
+#import timeit
+#import time
+from   collections import defaultdict               #Method 2
 
 # Main code
 def main():
   
-    # name   = input('Enter file:') # using python3, change to line below
+    # Variables
     name   = input('Enter file:')
     handle = open(name)
-    #counts = dict()                                # Method 1
-    counts = defaultdict(int)                       # Method 2
+    #counts = dict()                                #Method 1
+    counts = defaultdict(int)                       #Method 2
 
     # Create a dictionary of unique words and their count
     for line in handle:
@@ -39,7 +39,8 @@ if __name__ == "__main__":
     # Run main code
     main()
     print("End Program")
-    # Testing timers 
+
+    # TODO: Testing timers 
     #test_code = main()
     #time_taken = timeit.timeit(stmt=test_code, number=1000)
     #print("Time to Execute: ", time_taken)
