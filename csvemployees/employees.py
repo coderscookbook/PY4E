@@ -74,45 +74,61 @@
 import csv
 import os
 
-# Process csv data
+def ReadCsvFile(csv_file):
+  with open(csv_file, 'r') as f:
+    data = csv.DictReader(f)
+    for row in data:
+      print(row)
+    return data
+
 def count_department_members(csv_file):
-    # Variables
-    department_counts = {}
-    field_header      = ' Department' 
-    
-    # Create department counts dictionary
-    with open(csv_file, 'r') as file:
-        reader = csv.DictReader(file)
-        # Get each record in the csv file
-        for row in reader:
-          # Get the current department name from the record
-          # TODO: strip potential whitespaces
-          department_name = row[field_header]
-          # If department name exists in the dictionary, add 1 to count 
-          if department_name in department_counts:
-            department_counts[department_name] += 1
-          # If department not yet in dictionary, start the count at 1
-          else:
-            department_counts[department_name] = 1
+  # Variables
+  department_counts = {}
+  field_header      = ' Department' 
+  
+  # Create department counts dictionary
+  reader = ReadCsvFile(csv_file)
+  print("\tC")
+  # Get each record in the csv file
+  for row in reader:
+    print("\tD")
+    # Get the current department name from the record
+    department_name = row[field_header]
+    # If department name exists in the dictionary, add 1 to count 
+    if department_name in department_counts:
+      department_counts[department_name] += 1
+    # If department not yet in dictionary, start the count at 1
+    else:
+      department_counts[department_name] = 1
 
-    # Return diciontary of department name as key, and counts as value            
-    return department_counts
+  # Return diciontary of department name as key, and counts as value            
+  return department_counts
 
-# Create output file
+def ListDepartmentMembers(csv_file, department_name):
+  # Vars
+  department_members = {}
+  return department_name, department_members
+
 def write_department_counts_to_file(department_counts, output_file):
-    with open(output_file, 'w') as file:
-      for department, count in department_counts.items():
-        file.write(f"{department}: {count}\n")
+  with open(output_file, 'w') as file:
+    for department, count in department_counts.items():
+      file.write(f"{department}: {count}\n")
 
 
 if __name__ == "__main__":
-  
     cwd         = os.getcwd()
     csv_file    = os.path.join(cwd,'employees.csv')
     output_file = 'report.txt'  
     
     # Run Main Code
+    print("\tA")
     department_counts = count_department_members(csv_file)
+    print("\tE")
     write_department_counts_to_file(department_counts, output_file)
 
     print("Report written successfully!")
+
+
+
+
+
